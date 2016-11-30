@@ -19,9 +19,17 @@ class ProjectsController < ApplicationController
     if current_user.present?
       @project.upvote_by current_user
     else
-      random = SecureRandom.hex(10)
-      voter = VotingSession.find_or_create_by(voter_code: random)
-      @project.upvote_by voter
+      if cookies[:up8xgf7v].present?
+          #TODO something to say they have already voted
+          raise 'hell'
+      else
+        random = SecureRandom.hex(10)
+        voter = VotingSession.find_or_create_by(voter_code: random)
+        @project.upvote_by voter
+        cookies[:up8xgf7v] = random
+        #TODO do something when user has successfully voted
+
+      end
     end
     respond_to do |format|
       format.html { redirect_to :back }

@@ -41,39 +41,23 @@
 <%= link_to 'New Project', new_project_path %>
 
 <script>
-  function updateVotable(){
-    $('.likes').each(function(i, lesson){
-      var status = $(lesson).data('liked');
-      var url = $(lesson).attr('href')
-      var href = url.split('/')
-      href.pop()
-      var url_start = href.join('/')
-      if(status == true){
-        console.log(i + 'true')
-        $(lesson).attr('href', url_start + '/dislike')
-      }else if(status == false){
-        $(lesson).attr('href', url_start + '/like')
-        console.log(i + 'false')
-      }
-    })
-  }
-  $(document).ready(function(){
-    $('.likes').on('click', function(e){
-      e.preventDefault()
-
-    })
-    $('.likes').on('ajax:success', function(e, data, status, xhr){
-      console.log(data.count)
-      var count = data.count
-      var liked = $(this).data('liked')
-      $(this).find('.likes-count').html(count)
-      if(liked == true){
-        $(this).data('liked', false)
-      }else if(liked == false){
-        $(this).data('liked', true)
-      }
-      updateVotable();
-    });
-    updateVotable();
-  });
+	function readCookie(name) {
+	    var nameEQ = name + "=";
+	    var ca = document.cookie.split(';');
+	    for(var i=0;i < ca.length;i++) {
+	        var c = ca[i];
+	        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+	        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	    }
+	    return null;
+	}
+	$(document).ready(() => {
+		$('.likes').on('click', (e) => {
+			e.preventDefault();
+		})
+		$('.likes').on('ajax:success', (e, data, status, xhr) => {
+		  $(e.target).find('.likes-count').html(data.count)
+		});
+	})
+ 
 </script>
