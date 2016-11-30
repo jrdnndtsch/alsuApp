@@ -16,24 +16,30 @@ class ProjectsController < ApplicationController
 
   def upvote
     @project = Project.where(id: params[:project_id]).first
+    random = SecureRandom.hex(10)
     if current_user.present?
-      @project.upvote_by current_user
+      if current_user.voted_for? @project
+        @notice = 'you have already voted'
+      else
+        @project.upvote_by current_user
+        @notice = 'thanks for voting'
+        cookies[:up8xgf7v] = random
+      end  
     else
       if cookies[:up8xgf7v].present?
-          #TODO something to say they have already voted
-          raise 'hell'
+          @notice = 'you have already voted'
       else
-        random = SecureRandom.hex(10)
+        # random = SecureRandom.hex(10)
         voter = VotingSession.find_or_create_by(voter_code: random)
         @project.upvote_by voter
         cookies[:up8xgf7v] = random
-        #TODO do something when user has successfully voted
+        @notice = 'thanks for voting'
 
       end
     end
     respond_to do |format|
       format.html { redirect_to :back }
-      format.json { render json: { count: @project.get_upvotes.size } }
+      format.json { render json: { count: @project.get_upvotes.size, notice: @notice } }
     end
   end
 

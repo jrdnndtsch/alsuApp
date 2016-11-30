@@ -41,22 +41,13 @@
 <%= link_to 'New Project', new_project_path %>
 
 <script>
-	function readCookie(name) {
-	    var nameEQ = name + "=";
-	    var ca = document.cookie.split(';');
-	    for(var i=0;i < ca.length;i++) {
-	        var c = ca[i];
-	        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-	        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-	    }
-	    return null;
-	}
 	$(document).ready(() => {
 		$('.likes').on('click', (e) => {
 			e.preventDefault();
 		})
 		$('.likes').on('ajax:success', (e, data, status, xhr) => {
 		  $(e.target).find('.likes-count').html(data.count)
+		  alert(data.notice)
 		});
 	})
  
