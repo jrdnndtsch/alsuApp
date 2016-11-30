@@ -10,6 +10,7 @@
       <th>Description</th>
       <th>Approved</th>
       <th>User</th>
+      <th>Vote</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -22,6 +23,11 @@
         <td><%= project.description %></td>
         <td><%= project.approved %></td>
         <td><%= project.user.email %></td>
+        <td>
+          <%= link_to project_upvote_path(project), remote: true,  method: :get, data: { type: :json } do%>
+             <span><%= project.get_upvotes.size%></span> Vote
+          <% end %>
+        </td>
         <td><%= link_to 'Show', project %></td>
         <td><%= link_to 'Edit', edit_project_path(project) %></td>
         <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>

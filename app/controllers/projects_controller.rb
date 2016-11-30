@@ -12,6 +12,15 @@ class ProjectsController < ApplicationController
     end  
   end
 
+  def upvote
+    @project = Project.where(id: params[:project_id]).first
+    if current_user.present?
+      @project.upvote_by current_user
+    else
+      
+    end
+  end
+
   # GET /projects/1
   # GET /projects/1.json
   def show

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   # devise_for :controllers
-  resources :projects
+  resources :projects do
+      get 'upvote', to: 'projects#upvote'
+  end 
   # devise_for :users
 
   devise_for :users, controllers: {
