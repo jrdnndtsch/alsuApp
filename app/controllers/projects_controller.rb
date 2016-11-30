@@ -1,15 +1,17 @@
 class ProjectsController < ApplicationController
-   before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :upvote]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   # GET /projects
   # GET /projects.json
   def index
-    if current_user.is_admin?
-      @projects = Project.all
-    else
-      @projects = Project.where(user_id: current_user.id)
-    end  
+    if current_user.present?
+      if current_user.is_admin?
+        @projects = Project.all
+      else
+        @projects = Project.where(user_id: current_user.id)
+      end   
+    end
   end
 
   def upvote
@@ -17,7 +19,13 @@ class ProjectsController < ApplicationController
     if current_user.present?
       @project.upvote_by current_user
     else
-      
+      random = SecureRandom.hex(10)
+      voter = VotingSession.find_or_create_by(voter_code: random)
+      @project.upvote_by voter
+    end
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render json: { count: @project.get_upvotes.size } }
     end
   end
 

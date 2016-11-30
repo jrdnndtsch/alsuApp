@@ -25,7 +25,7 @@
         <td><%= project.user.email %></td>
         <td>
           <%= link_to project_upvote_path(project), class: 'likes', remote: true,  method: :get, data: { type: :json } do%>
-             <span><%= project.get_upvotes.size%></span> Vote
+             <span class="likes-count"><%= project.get_upvotes.size%></span> Vote
           <% end %>
         </td>
         <td><%= link_to 'Show', project %></td>
