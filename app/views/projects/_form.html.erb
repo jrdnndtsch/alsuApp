@@ -24,8 +24,7 @@
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :approved %><br>
-    <%= f.check_box :approved %>
+    <%= f.hidden_field :approved, value: false%>
   </div>
   <div class="field">
     <%= f.hidden_field :user_id, value: current_user.id %>
