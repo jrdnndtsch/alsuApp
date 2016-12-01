@@ -8,6 +8,8 @@ class ProjectsController < ApplicationController
     if current_user.present?
       if current_user.is_admin?
         @projects = Project.all
+        @projects_approved = Project.where(approved: true)
+        @projects_pending = Project.where(approved: false)
       else
         @projects = Project.where(user_id: current_user.id)
       end   
@@ -55,6 +57,11 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    if params[:project].present?
+      project = Project.find(params[:project])
+      project.update(approved: params[:approved])
+      project.save
+    end
   end
 
   # POST /projects
@@ -76,6 +83,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
+
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }

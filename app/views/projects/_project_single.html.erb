@@ -1,0 +1,33 @@
+<% if @projects.present?%>
+  <% @projects.each do |project| %>
+    <tr>
+      <td><%= project.name %></td>
+      <td><%= project.slogan %></td>
+      <td><%= project.description %></td>
+      <td><%= project.approved %></td>
+      <td><%= project.user.email %></td>
+      <td>
+        <%= link_to project_upvote_path(project), class: 'likes', remote: true,  method: :get, data: { type: :json } do%>
+           <span class="likes-count"><%= project.get_upvotes.size%></span> Vote
+        <% end %>
+      </td>
+      <td><%= link_to 'Show', project %></td>
+      <td><%= link_to 'Edit', edit_project_path(project) %></td>
+      <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+<% end %>  
+
+<script>
+  $(document).ready(() => {
+    $('.likes').on('click', (e) => {
+      e.preventDefault();
+    })
+    $('.likes').on('ajax:success', (e, data, status, xhr) => {
+      console.log(data, 'the data')
+      $(e.target).find('.likes-count').html(data.count)
+      alert(data.notice)
+    });
+  })
+ 
+</script>

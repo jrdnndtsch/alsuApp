@@ -1,0 +1,58 @@
+<% @projects_pending.each do |project| %>
+  <tr class="pending-project">
+    <td><%= project.name %></td>
+    <td><%= project.slogan %></td>
+    <td><%= project.description %></td>
+    <td>
+      <%= form_for(project, remote: true, :authenticity_token => true)  do |f| %>
+        <%= f.check_box :approved, data: project.id, class: 'project_approved_check' %>
+      <% end %>
+    </td>
+    <td><%= project.user.email %></td>
+    <td>
+      <%= link_to project_upvote_path(project), class: 'likes', remote: true,  method: :get, data: { type: :json } do%>
+         <span class="likes-count"><%= project.get_upvotes.size%></span> Vote
+      <% end %>
+    </td>
+    <td><%= link_to 'Show', project %></td>
+    <td><%= link_to 'Edit', edit_project_path(project) %></td>
+    <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+<% @projects_approved.each do |project| %>
+  <tr>
+    <td><%= project.name %></td>
+    <td><%= project.slogan %></td>
+    <td><%= project.description %></td>
+    <td>
+      <%= form_for(project, remote: true, :authenticity_token => true)  do |f| %>
+        <%= f.check_box :approved, data: project.id, class: 'project_approved_check' %>
+      <% end %>
+    </td>
+    <td><%= project.user.email %></td>
+    <td>
+      <%= link_to project_upvote_path(project), class: 'likes', remote: true,  method: :get, data: { type: :json } do%>
+         <span class="likes-count"><%= project.get_upvotes.size%></span> Vote
+      <% end %>
+    </td>
+    <td><%= link_to 'Show', project %></td>
+    <td><%= link_to 'Edit', edit_project_path(project) %></td>
+    <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+
+<script>
+  $('.project_approved_check').change((e) => {
+    let project = $(e.target).attr('data')
+    let approved = $(e.target)[0].checked
+    console.log(project, approved)
+    $.ajax({
+      url: `/projects/${project}/edit`,
+      type: 'get',
+      data: {
+        project: project,
+        approved: approved
+      }
+    })
+  });
+</script>

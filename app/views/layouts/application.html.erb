@@ -13,6 +13,19 @@
 	<% if alert %>
 	  <p class="alert alert-danger"><%= alert %></p>
 	<% end %>
+
+	<nav>
+		<ul>
+			<li><%= link_to 'All approved projects', all_projects_path %></li>
+			<% if current_user.present? && current_user.is_admin? %>
+				<li><%= link_to 'All Submitted Projects', projects_path %></li>
+			<% elsif current_user.present? %>
+				<li><%= link_to 'My Projects', projects_path %></li>
+			<% else %>	
+			<% end %>
+			<li><%= link_to 'New Project', new_project_path %></li>
+		</ul>
+	</nav>
 	<% if user_signed_in? %>
 	  Logged in as <strong><%= current_user.email %></strong>.
 	  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
