@@ -14,3 +14,9 @@
  *= require_self
  *= require bootsy
  */
+
+
+.bootsy_text_area {
+	width: 75%;
+	height: 400px;
+}

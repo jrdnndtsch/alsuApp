@@ -50,7 +50,7 @@ Bootsy.setup do |config|
   #
   #
   # Storage mode
-  #   You can change the sorage mode below from :file to :fog if you want
+  #   You can change the storage mode below from :file to :fog if you want
   #   to use Amazon S3 and other cloud services. If you do that, please add
   #   'fog' to your Gemfile and create and configure your credentials in an
   #   initializer file, as described in Carrierwave's docs:

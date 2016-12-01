@@ -18,8 +18,9 @@ gem 'bootsy'
 gem 'simple_form'
 gem 'fog'
 
-gem "paperclip", "~> 5.0.0"
-
+# gem "paperclip", "~> 5.0.0"
+gem 'aws-sdk-v1'
+gem 'aws-s3'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
