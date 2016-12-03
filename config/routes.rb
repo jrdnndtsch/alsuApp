@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # devise_for :controllers
   resources :projects do
       get 'upvote', to: 'projects#upvote'
+      get 'publish', to: 'projects#publish'
   end 
   # devise_for :users
 

@@ -61,6 +61,16 @@ class ProjectsController < ApplicationController
   def show
   end
 
+  def publish
+    project = Project.find(params[:project_id])
+    project.published = true
+    project.save
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { render json: { published: project.published } }
+    end
+  end
+
   # GET /projects/new
   def new
     @project = Project.new
@@ -93,7 +103,6 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
-
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
@@ -123,6 +132,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :slogan, :description, :approved, :user_id, :featured_img)
+      params.require(:project).permit(:name, :slogan, :description, :approved, :user_id, :featured_img, :published)
     end
 end

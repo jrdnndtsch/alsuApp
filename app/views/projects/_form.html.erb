@@ -33,7 +33,29 @@
   <div class="field">
     <%= f.hidden_field :user_id, value: current_user.id %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <% if @project.published == false %>
+    <div class="publish_actions">
+      <div class="actions">
+        <%= f.submit 'Save' %>
+      </div>
+      <% if @project.id.present? %>
+        <%= link_to project_publish_path(@project), remote: true, class: 'publish_project',  method: :get, data: { type: :json } do%>
+           Publish
+        <% end %>
+     <% end %> 
+    </div>
+  <% end %>
 <% end %>
+
+<script>
+  $(document).ready(() => {
+    $('.publish_project').on('ajax:success', (e, data, status, xhr) => {
+      console.log(data, 'the data')
+      data.published ? $('.publish_actions').css('display', 'none') : $('.publish_actions').css('display', 'block')
+    });
+  })
+</script>
+
+
+
+
