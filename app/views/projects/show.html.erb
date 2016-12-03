@@ -4,7 +4,7 @@
   <strong>Name:</strong>
   <%= @project.name %>
 </p>
-
+ <%= image_tag @project.featured_img.url ? @project.featured_img.url(:original) : '' %>
 <p>
   <strong>Slogan:</strong>
   <%= @project.slogan %>
