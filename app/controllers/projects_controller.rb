@@ -8,8 +8,8 @@ class ProjectsController < ApplicationController
     if current_user.present?
       if current_user.is_admin?
         @projects = Project.all
-        @projects_approved = Project.where(approved: true)
-        @projects_pending = Project.where(approved: false)
+        @projects_approved = Project.submitted_and_approved
+        @projects_pending = Project.submitted_and_pending
       else
         @projects = Project.where(user_id: current_user.id)
       end   
