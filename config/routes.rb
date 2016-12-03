@@ -4,6 +4,8 @@ Rails.application.routes.draw do
       get 'upvote', to: 'projects#upvote'
       get 'publish', to: 'projects#publish'
   end 
+
+  resources :charges
   # devise_for :users
 
   devise_for :users, controllers: {

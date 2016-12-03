@@ -36,6 +36,9 @@ gem 'paperclip'
 gem 'aws-sdk-v1'
 gem 'aws-s3'
 
+#for payment 
+gem 'stripe'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
