@@ -40,8 +40,19 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  # Rails.application.routes.default_url_options[:host] =  'teacherslearningcode.com'
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default :charset => "utf-8"
 
   config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+          api_key: ENV['api_key'],
+          domain: ENV['domain']
+  }
   # SMTP settings for mailgun
   ActionMailer::Base.smtp_settings = {
     :port           => 587,

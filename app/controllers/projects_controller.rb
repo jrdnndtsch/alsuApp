@@ -19,22 +19,24 @@ class ProjectsController < ApplicationController
   def upvote
     @project = Project.where(id: params[:project_id]).first
     random = SecureRandom.hex(10)
+    id = @project.id.to_s
+    key = 'up8xgf7v' + id 
     if current_user.present?
       if current_user.voted_for? @project
         @notice = 'you have already voted'
       else
         @project.upvote_by current_user
         @notice = 'thanks for voting'
-        cookies[:up8xgf7v] = random
+        cookies.permanent[key] = @project.id
       end  
     else
-      if cookies[:up8xgf7v].present?
+      if cookies[key].present? 
           @notice = 'you have already voted'
       else
         # random = SecureRandom.hex(10)
         voter = VotingSession.find_or_create_by(voter_code: random)
         @project.upvote_by voter
-        cookies[:up8xgf7v] = random
+        cookies.permanent[key] = @project.id
         @notice = 'thanks for voting'
 
       end
