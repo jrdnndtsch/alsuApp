@@ -18,22 +18,31 @@ class ProjectsController < ApplicationController
 
   def upvote
     @project = Project.where(id: params[:project_id]).first
+    # create random hex for voter code
     random = SecureRandom.hex(10)
+    # id of project being voted on
     id = @project.id.to_s
+    # key for setting the cookie
     key = 'up8xgf7v' + id 
+
     if current_user.present?
+      # if the user is logged
       if current_user.voted_for? @project
+        # has already voted for the project
         @notice = 'you have already voted'
       else
+        # has not yet voted, let them vote and set cookie
         @project.upvote_by current_user
         @notice = 'thanks for voting'
         cookies.permanent[key] = @project.id
       end  
     else
+      # user is not logged in
       if cookies[key].present? 
+          # cookie for current project present 
           @notice = 'you have already voted'
       else
-        # random = SecureRandom.hex(10)
+        # no cookie for current project, create a new anonymous voter send vote and set cookie
         voter = VotingSession.find_or_create_by(voter_code: random)
         @project.upvote_by voter
         cookies.permanent[key] = @project.id

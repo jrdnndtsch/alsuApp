@@ -31,6 +31,11 @@ gem 'acts_as_votable', '~> 0.10.0'
 gem 'mailgun-ruby', '~>1.0.0'
 gem 'mailgun_rails'
 
+# for image management
+gem 'paperclip'
+gem 'aws-sdk-v1'
+gem 'aws-s3'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
