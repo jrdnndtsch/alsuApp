@@ -37,15 +37,18 @@
     <div class="publish_actions">
       <div class="actions">
         <%= f.submit 'Save' %>
-      </div>
-      <% if @project.id.present? %>
-        <%= link_to project_publish_path(@project), remote: true, class: 'publish_project',  method: :get, data: { type: :json } do%>
-           Publish
-        <% end %>
-     <% end %> 
+      </div> 
     </div>
   <% end %>
 <% end %>
+
+<% if @project.published == false && @project.id.present?%>
+  <button data-open="donation">Publish</button>
+<% end %>
+
+<div class="modal hidden" id="donation">
+  <%= render 'charges/new', locals: {project: @project}%>
+</div>
 
 <script>
   $(document).ready(() => {
@@ -53,6 +56,11 @@
       console.log(data, 'the data')
       data.published ? $('.publish_actions').css('display', 'none') : $('.publish_actions').css('display', 'block')
     });
+
+    $('[data-open]').on('click', (e) => {
+      let modal = `#${$(e.target).data('open')}`
+      $(modal).removeClass('hidden')
+    })
   })
 </script>
 

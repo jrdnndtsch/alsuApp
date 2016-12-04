@@ -17,3 +17,7 @@
 .pending-project {
 	background: lightcyan;
 }
+
+.hidden {
+	display: none;
+}
