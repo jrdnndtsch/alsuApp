@@ -25,5 +25,15 @@
   <%= @project.user.full_name %>
 </p>
 
+<% @project.project_stories.each do |project|%>
+  <% if project.media_type == 'text' %>
+    <p><%= project.description%></p>
+  <% elsif project.media_type == 'video'%>  
+    <a href="<%= project.video_link%>">video</a>
+  <% elsif project.media_type == 'image'%>  
+    <img src="" alt="">
+  <% end %>  
+<% end %>
+
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
