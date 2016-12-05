@@ -21,4 +21,8 @@ class User < ActiveRecord::Base
   def is_admin?
   	self.role == 'admin'
   end
+
+  def full_name
+    return "#{self.first_name} #{self.last_name}"
+  end
 end

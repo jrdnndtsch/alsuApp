@@ -20,12 +20,20 @@
     <%= f.file_field :featured_img %>
   </div>
   <div class="field">
-    <%= f.label :slogan %><br>
+    <p>Project slogan/motto or short explanation of your project.</p>
     <%= f.text_field :slogan %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <p>How does your project fulfill/ is aligned with the mission and objectives of the Opto Project?</p>
+    <%= f.text_area :objective %>
+  </div>
+  <div class="field">
+    <p>What is the intended outcome or of your project?</p>
+    <%= f.text_area :outcome %>
+  </div>
+  <div class="field">
+    <p>What is the project's budget or specific request for financial support from the Opto Project?</p>
+    <%= f.text_area :budget %>
   </div>
   <div class="field">
     <%= f.hidden_field :approved, value: false%>
@@ -49,7 +57,7 @@
 <div class="modal hidden" id="donation">
   <%= render 'charges/new', locals: {project: @project}%>
 </div>
-
+<script src="https://checkout.stripe.com/checkout.js"></script>
 <script>
   $(document).ready(() => {
     var handler;

@@ -21,8 +21,8 @@
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @project.user %>
+  <strong>User (created by):</strong>
+  <%= @project.user.full_name %>
 </p>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |

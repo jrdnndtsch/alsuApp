@@ -2,7 +2,9 @@
   <tr class="pending-project">
     <td><%= project.name %></td>
     <td><%= project.slogan %></td>
-    <td><%= project.description %></td>
+    <td><%= project.objective %></td>
+    <td><%= project.outcome %></td>
+    <td><%= project.budget %></td>
     <td>
       <%= form_for(project, remote: true, :authenticity_token => true)  do |f| %>
         <%= f.check_box :approved, data: project.id, class: 'project_approved_check' %>
@@ -28,7 +30,9 @@
   <tr>
     <td><%= project.name %></td>
     <td><%= project.slogan %></td>
-    <td><%= project.description %></td>
+    <td><%= project.objective %></td>
+    <td><%= project.outcome %></td>
+    <td><%= project.budget %></td>
     <td>
       <%= form_for(project, remote: true, :authenticity_token => true)  do |f| %>
         <%= f.check_box :approved, data: project.id, class: 'project_approved_check' %>
