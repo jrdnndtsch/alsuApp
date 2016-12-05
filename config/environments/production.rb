@@ -87,4 +87,10 @@ Rails.application.configure do
     :password       => ENV['password'],
     :authentication => :plain,
   }
+
+  Paperclip.options[:command_path] = "/usr/local/bin/"
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :bucket => 'alsu-app-dev'
+  }
 end
