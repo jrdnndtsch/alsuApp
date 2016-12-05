@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161203194631) do
+ActiveRecord::Schema.define(version: 20161205143609) do
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20161203194631) do
     t.integer  "featured_img_file_size"
     t.datetime "featured_img_updated_at"
     t.boolean  "published",                 default: false
+    t.float    "donation_amount"
   end
 
   add_index "projects", ["user_id"], name: "index_projects_on_user_id"

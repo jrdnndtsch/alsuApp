@@ -52,7 +52,9 @@
 
 <script>
   $(document).ready(() => {
+    var handler;
     $('.publish_project').on('ajax:success', (e, data, status, xhr) => {
+     
       console.log(data, 'the data')
       data.published ? $('.publish_actions').css('display', 'none') : $('.publish_actions').css('display', 'block')
     });
@@ -60,7 +62,49 @@
     $('[data-open]').on('click', (e) => {
       let modal = `#${$(e.target).data('open')}`
       $(modal).removeClass('hidden')
+      handler = StripeCheckout.configure({
+        key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+        locale: 'auto',
+        name: 'Alsu App',
+        description: 'One-time donation',
+        token: function(token) {
+          $('input#stripeToken').val(token.id);
+          $('form').submit();
+        }
+      });
+      console.log(handler, 'handler')
+    
     })
+    
+    
+    $('#donateButton').on('click', function(e) {
+      e.preventDefault();
+
+      $('#error_explanation').html('');
+
+      var amount = $('input#amount').val();
+      amount = amount.replace(/\$/g, '').replace(/\,/g, '')
+
+      amount = parseFloat(amount);
+
+      if (isNaN(amount)) {
+        $('#error_explanation').html('<p>Please enter a valid amount in USD ($).</p>');
+      }
+      else if (amount < 5.00) {
+        $('#error_explanation').html('<p>Donation amount must be at least $5.</p>');
+      }
+      else {
+        amount = amount * 100; // Needs to be an integer!
+        handler.open({
+          amount: Math.round(amount)
+        })
+      }
+    });
+
+    // Close Checkout on page navigation
+    $(window).on('popstate', function() {
+      handler.close();
+    });
   })
 </script>
 

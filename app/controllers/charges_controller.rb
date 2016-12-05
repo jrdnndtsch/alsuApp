@@ -6,7 +6,7 @@ class ChargesController < ApplicationController
 
 	def create
 		@project = Project.find(params[:project])
-		@project.update(published: true)
+		
 		@amount = params[:amount]
 
 	  @amount = @amount.gsub('$', '').gsub(',', '')
@@ -14,12 +14,14 @@ class ChargesController < ApplicationController
 	  begin
 	    @amount = Float(@amount).round(2)
 	  rescue
-	    flash[:error] = 'Charge not completed. Please enter a valid amount in USD ($).'
+	    flash[:error] = 'Charge not completed. Please enter a valid amount in CAD ($).'
 	    redirect_to new_charge_path
 	    return
 	  end
 
 	  @amount = (@amount * 100).to_i # Must be an integer!
+
+	  @project.update(published: true, donation_amount: @amount)
 
 	 	customer = Stripe::Customer.create(
 	    :email => params[:stripeEmail],

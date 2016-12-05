@@ -10,6 +10,11 @@
     </td>
     <td><%= project.user.email %></td>
     <td>
+      <% if project.donation_amount.present? %>
+        <%= number_to_currency(project.donation_amount * 0.01) %>
+      <% end %>
+    </td>
+    <td>
       <%= link_to project_upvote_path(project), class: 'likes', remote: true,  method: :get, data: { type: :json } do%>
          <span class="likes-count"><%= project.get_upvotes.size%></span> Vote
       <% end %>
@@ -30,6 +35,11 @@
       <% end %>
     </td>
     <td><%= project.user.email %></td>
+    <td>
+      <% if project.donation_amount.present? %>
+        <%= number_to_currency(project.donation_amount * 0.01) %>
+      <% end %>
+    </td>
     <td>
       <%= link_to project_upvote_path(project), class: 'likes', remote: true,  method: :get, data: { type: :json } do%>
          <span class="likes-count"><%= project.get_upvotes.size%></span> Vote
