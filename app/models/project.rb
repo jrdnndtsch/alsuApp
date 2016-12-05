@@ -2,6 +2,9 @@ class Project < ActiveRecord::Base
   belongs_to :user
   acts_as_votable
 
+  has_many :project_stories
+  accepts_nested_attributes_for :project_stories, allow_destroy: true
+  
   has_attached_file :featured_img,
     default_url: "featured_img.jpg"
     validates_attachment_content_type :featured_img, content_type: /\Aimage\/.*\Z/

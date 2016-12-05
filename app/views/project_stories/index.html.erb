@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Project Stories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Media type</th>
+      <th>Description</th>
+      <th>Video link</th>
+      <th>Project</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @project_stories.each do |project_story| %>
+      <tr>
+        <td><%= project_story.media_type %></td>
+        <td><%= project_story.description %></td>
+        <td><%= project_story.video_link %></td>
+        <td><%= project_story.project %></td>
+        <td><%= link_to 'Show', project_story %></td>
+        <td><%= link_to 'Edit', edit_project_story_path(project_story) %></td>
+        <td><%= link_to 'Destroy', project_story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project story', new_project_story_path %>

@@ -1,0 +1,1 @@
+json.partial! "project_stories/project_story", project_story: @project_story

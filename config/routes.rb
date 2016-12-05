@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :project_stories
   # devise_for :controllers
   resources :projects do
       get 'upvote', to: 'projects#upvote'

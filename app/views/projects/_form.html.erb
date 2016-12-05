@@ -35,6 +35,12 @@
     <p>What is the project's budget or specific request for financial support from the Opto Project?</p>
     <%= f.text_area :budget %>
   </div>
+  <h2>Additional Project Details</h2>
+  <%= f.fields_for :project_stories do |builder| %>
+    <%= render 'project_story_fields', f: builder %>
+  <% end %>
+
+  <%= link_to_add_fields "add project_story", f, :project_stories  %>
   <div class="field">
     <%= f.hidden_field :approved, value: false%>
   </div>
@@ -113,6 +119,22 @@
     $(window).on('popstate', function() {
       handler.close();
     });
+
+    console.log('ready')
+    $('form').on('click', '.remove_fields', function(even){
+      event.preventDefault()
+      $(this).prev('input[type=hidden]').val('1');
+      $(this).closest('fieldset').hide();
+    });
+    
+    $('form').on('click', '.add_fields', function(event){
+      event.preventDefault();
+      time = new Date().getTime();
+      regexp = new RegExp($(this).data('id'), 'g');
+      console.log(regexp)
+      $(this).before($(this).data('fields').replace(regexp, time));
+
+    })
   })
 </script>
 
