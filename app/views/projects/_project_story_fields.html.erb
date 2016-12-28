@@ -1,15 +1,21 @@
 <fieldset>
 	<div class="field">
 	  <%= f.label :media_type %><br>
-	  <%= f.text_field :media_type %>
+	  <%= f.select :media_type, ProjectStory::MEDIA_TYPES %>
 	</div>
-	<div class="field">
-	  <%= f.label :description %><br>
-	  <%= f.text_area :description %>
-	</div>
-	<div class="field">
-	  <%= f.label :video_link %><br>
-	  <%= f.text_field :video_link %>
+	<div class="hidde">
+		<div class="field">
+		  <%= f.label :description %><br>
+		  <%= f.text_area :description %>
+		</div>
+		<div class="field">
+		  <%= f.label :video_link %><br>
+		  <%= f.text_field :video_link %>
+		</div>
+		<div class="field">
+			<%= f.label :img %>
+			<%= f.file_field :img %>
+		</div>
 	</div>
 	<% if @project.present? %>
 		<div class="field">

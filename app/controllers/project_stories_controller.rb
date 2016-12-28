@@ -69,6 +69,6 @@ class ProjectStoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_story_params
-      params.require(:project_story).permit(:media_type, :description, :video_link, :project_id)
+      params.require(:project_story).permit(:media_type, :description, :video_link, :project_id, :img)
     end
 end

@@ -31,7 +31,7 @@
   <% elsif project.media_type == 'video'%>  
     <a href="<%= project.video_link%>">video</a>
   <% elsif project.media_type == 'image'%>  
-    <img src="" alt="">
+    <%= image_tag project.img.url ? project.img.url(:original) : '' %>
   <% end %>  
 <% end %>
 

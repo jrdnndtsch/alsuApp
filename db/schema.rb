@@ -11,15 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161205191319) do
+ActiveRecord::Schema.define(version: 20161228141834) do
 
   create_table "project_stories", force: :cascade do |t|
     t.string   "media_type"
     t.text     "description"
     t.string   "video_link"
     t.integer  "project_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
   end
 
   add_index "project_stories", ["project_id"], name: "index_project_stories_on_project_id"
