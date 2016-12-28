@@ -103,6 +103,12 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
+    if params[:project][:category_list].present?
+      @project.category_list = []
+      params[:project][:category_list].each do |cat|
+        @project.category_list.add(cat)
+      end  
+    end
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
@@ -132,6 +138,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :slogan, :description, :approved, :user_id, :featured_img, :published, :objective, :outcome, :budget, project_stories_attributes: [:id, :media_type, :video_link, :description, :img, :project_id])
+      params.require(:project).permit(:name, :slogan, :description, :approved, :user_id, :featured_img, :published, :objective, :outcome, :budget, :category_list, project_stories_attributes: [:id, :media_type, :video_link, :description, :img, :project_id])
     end
 end

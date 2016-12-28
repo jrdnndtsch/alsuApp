@@ -28,6 +28,8 @@ gem 'devise'
 
 gem 'acts_as_votable', '~> 0.10.0'
 
+gem 'acts-as-taggable-on', '~> 4.0'
+
 gem 'mailgun-ruby', '~>1.0.0'
 gem 'mailgun_rails'
 

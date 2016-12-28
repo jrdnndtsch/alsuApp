@@ -20,6 +20,13 @@
     <%= f.file_field :featured_img %>
   </div>
   <div class="field">
+    <p>select all categories that fit your project</p>
+    <% Project::PROJECT_CATEGORIES.each do |cat| %>
+      <%= f.label cat%>
+      <%= f.check_box(:category_list, { :multiple => true }, cat, nil) %>
+    <% end %>
+  </div>
+  <div class="field">
     <p>Project slogan/motto or short explanation of your project.</p>
     <%= f.text_field :slogan %>
   </div>
