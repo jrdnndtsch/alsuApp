@@ -11,8 +11,8 @@
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @project.description %>
+  <strong>Objective:</strong>
+  <%= @project.objective %>
 </p>
 
 <p>
@@ -23,6 +23,14 @@
 <p>
   <strong>User (created by):</strong>
   <%= @project.user.full_name %>
+</p>
+<p>
+  <strong>categories:</strong>
+  <ul>
+    <% @project.category_list.each do |cat|%>
+      <li><%= cat %> </li>
+    <% end %>
+  </ul>
 </p>
 
 <% @project.project_stories.each do |project|%>

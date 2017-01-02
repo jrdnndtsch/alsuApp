@@ -14,8 +14,8 @@
 	  <p class="alert alert-danger"><%= alert %></p>
 	<% end %>
 
-	<nav>
-		<ul>
+	<nav class="clearfix">
+		<ul class="clearfix">
 			<li><%= link_to 'All approved projects', all_projects_path %></li>
 			<% if current_user.present? && current_user.is_admin? %>
 				<li><%= link_to 'All Submitted Projects', projects_path %></li>
@@ -25,15 +25,17 @@
 			<% end %>
 			<li><%= link_to 'New Project', new_project_path %></li>
 		</ul>
+		<div class="login">
+			<% if user_signed_in? %>
+			  Logged in as <strong><%= current_user.email %></strong>.
+			  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+			  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+			<% else %>
+			  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+			  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+			<% end %>
+		</div>
 	</nav>
-	<% if user_signed_in? %>
-	  Logged in as <strong><%= current_user.email %></strong>.
-	  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-	  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-	<% else %>
-	  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-	  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-	<% end %>
 	<%= yield %>
 
 </body>

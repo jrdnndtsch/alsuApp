@@ -89,6 +89,12 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
+    if params[:project][:category_list].present?
+      @project.category_list = []
+      params[:project][:category_list].each do |cat|
+        @project.category_list.add(cat)
+      end  
+    end
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
