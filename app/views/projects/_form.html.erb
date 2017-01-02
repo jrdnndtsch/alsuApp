@@ -43,9 +43,11 @@
     <%= f.text_area :budget %>
   </div>
   <h2>Additional Project Details</h2>
-  <%= f.fields_for :project_stories do |builder| %>
-    <%= render 'project_story_fields', f: builder %>
-  <% end %>
+  <div id="sortable" data-update_url="<%= sort_project_stories_path %>"> 
+    <%= f.fields_for :project_stories, f.object.project_stories.rank(:row_order) do |builder| %>
+      <%= render 'project_story_fields', f: builder %>
+    <% end %>
+  </div>
 
   <%= link_to_add_fields "add project_story", f, :project_stories  %>
   <div class="field">
@@ -142,8 +144,13 @@
       $(this).before($(this).data('fields').replace(regexp, time));
 
     })
+
+  
   })
+
+  
 </script>
+
 
 
 

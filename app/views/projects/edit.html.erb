@@ -4,3 +4,28 @@
 
 <%= link_to 'Show', @project %> |
 <%= link_to 'Back', projects_path %>
+
+<script>
+	$('#sortable').sortable();
+
+	$('#sortable').sortable({
+	  axis: 'y',
+	  items: '.story_block',
+	  cursor: 'move',
+	  stop: function(e, ui){
+	    ui.item.children('.story_block').effect('highlight', {}, 1000)
+	    },
+	    update: function(e, ui){
+	      item_id = ui.item.data('block_id')
+	      row_order = ui.item.index('.story_block')
+	      console.log($(this).data('update_url'), item_id)
+
+	      $.ajax({
+	        type: 'POST',
+	        url: $(this).data('update_url'),
+	        dataType: 'json',
+	        data: {id: item_id, project_story: { row_order_position: row_order}}  
+	        })
+	    }
+	  })
+</script>

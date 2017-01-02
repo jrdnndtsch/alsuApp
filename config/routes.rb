@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :project_stories
+  
   # devise_for :controllers
   resources :projects do
       get 'upvote', to: 'projects#upvote'
@@ -20,6 +20,10 @@ Rails.application.routes.draw do
   root 'pages#all_projects'
 
   get 'all_projects' => 'pages#all_projects'
+
+  resources :project_stories do
+    post :sort, on: :collection
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,4 +1,4 @@
-<fieldset>
+<fieldset class="story_block" data-block_id="<%= f.object.id%>">
 	<div class="field">
 	  <%= f.label :media_type %><br>
 	  <%= f.select :media_type, ProjectStory::MEDIA_TYPES %>
@@ -15,6 +15,9 @@
 		<div class="field">
 			<%= f.label :img %>
 			<%= f.file_field :img %>
+			<% if f.object.img.exists? %>
+			  <%= image_tag f.object.img.url(:original) %><br/>
+			<% end %>
 		</div>
 	</div>
 	<% if @project.present? %>

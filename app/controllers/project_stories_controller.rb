@@ -1,10 +1,19 @@
 class ProjectStoriesController < ApplicationController
-  before_action :set_project_story, only: [:show, :edit, :update, :destroy]
+  before_action :set_project_story, only: [:show, :edit, :update, :destroy, :sort]
 
   # GET /project_stories
   # GET /project_stories.json
   def index
     @project_stories = ProjectStory.all
+  end
+
+  def sort
+    # raise 'hell'
+    @project_story.attributes = params.require(:project_story).permit(:row_order_position)
+    @project_story.save
+    # this action will be called via ajax
+    render nothing: true
+
   end
 
   # GET /project_stories/1

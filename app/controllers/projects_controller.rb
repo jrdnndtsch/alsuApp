@@ -59,6 +59,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    #rank project story blocks by row order 
+    @project_stories = Project.find(@project).project_stories.rank(:row_order)
   end
 
   def publish

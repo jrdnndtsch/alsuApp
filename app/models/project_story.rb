@@ -1,6 +1,10 @@
 class ProjectStory < ActiveRecord::Base
   belongs_to :project
 
+  include RankedModel
+    ranks :row_order,
+    :with_same => :project_id
+
   MEDIA_TYPES = ['video', 'text', 'image']
 
   has_attached_file :img,

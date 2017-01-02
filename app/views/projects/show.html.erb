@@ -33,7 +33,7 @@
   </ul>
 </p>
 
-<% @project.project_stories.each do |project|%>
+<% @project_stories.each do |project|%>
   <% if project.media_type == 'text' %>
     <p><%= project.description%></p>
   <% elsif project.media_type == 'video'%>  

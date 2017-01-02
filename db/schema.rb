@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161228190832) do
+ActiveRecord::Schema.define(version: 20170102195749) do
 
   create_table "project_stories", force: :cascade do |t|
     t.string   "media_type"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20161228190832) do
     t.string   "img_content_type"
     t.integer  "img_file_size"
     t.datetime "img_updated_at"
+    t.integer  "row_order"
   end
 
   add_index "project_stories", ["project_id"], name: "index_project_stories_on_project_id"
