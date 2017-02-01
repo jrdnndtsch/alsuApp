@@ -19,7 +19,7 @@
   </thead>
 
   <tbody>
-    <% if current_user.is_admin? %>
+    <% if current_user.present? && current_user.is_admin? %>
       <%= render 'projects_admin_single'%>
     <% else %>  
       <%= render 'project_single'%>

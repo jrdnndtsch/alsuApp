@@ -29,6 +29,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
 
+gem 'simple_token_authentication', '~> 1.0' #for api token authentication
+
 gem 'acts_as_votable', '~> 0.10.0'
 
 gem 'acts-as-taggable-on', '~> 4.0'

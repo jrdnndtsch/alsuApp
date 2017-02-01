@@ -21,6 +21,21 @@ Rails.application.routes.draw do
 
   get 'all_projects' => 'pages#all_projects'
 
+  # scope '/api' do 
+  #   scope '/v1' do 
+  #     scope '/projects' do 
+  #       get '/' => 'api_projects#show'
+  #     end 
+  #   end
+  # end
+
+  namespace :api, :defaults => {:format => 'json'} do
+    devise_for :users
+    namespace :v1 do
+      resources :projects
+    end
+  end
+
   resources :project_stories do
     post :sort, on: :collection
   end

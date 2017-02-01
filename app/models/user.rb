@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :projects
   acts_as_voter
+  acts_as_token_authenticatable
 
   has_attached_file :avatar,
     styles: {
