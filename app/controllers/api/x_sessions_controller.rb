@@ -6,7 +6,7 @@ class Api::SessionsController < Devise::SessionsController
   protect_from_forgery with: :null_session
   acts_as_token_authentication_handler_for User
   respond_to :json
-  raise 'hell'
+  # raise 'hell'
   def create
     resource = User.find_for_database_authentication(:email => params[:user_login][:email])
     return invalid_login_attempt unless resource
