@@ -3,7 +3,7 @@ module Api
     class ProjectsController < Api::BaseController
     	def index
     		@projects = Project.where(approved: true)
-    		render json: @projects
+    		render json: @projects, include: :category
     	end
     end
   end
